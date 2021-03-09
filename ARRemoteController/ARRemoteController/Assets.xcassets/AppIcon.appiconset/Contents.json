@@ -1,21 +1,25 @@
 {
   "images" : [
     {
+      "filename" : "remote-control.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
+      "filename" : "remote-control-1.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "20x20"
     },
     {
+      "filename" : "remote-control-2.png",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
+      "filename" : "remote-control-3.png",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "29x29"

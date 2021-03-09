@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		A00B5FFD25F651DE000C3804 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00B5FFC25F651DE000C3804 /* AppDelegate.swift */; };
 		A00B5FFF25F651DE000C3804 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00B5FFE25F651DE000C3804 /* SceneDelegate.swift */; };
-		A00B600125F651DE000C3804 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00B600025F651DE000C3804 /* ViewController.swift */; };
+		A00B600125F651DE000C3804 /* ObjectDetectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00B600025F651DE000C3804 /* ObjectDetectionViewController.swift */; };
 		A00B600425F651DE000C3804 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A00B600225F651DE000C3804 /* Main.storyboard */; };
 		A00B600625F651DF000C3804 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A00B600525F651DF000C3804 /* Assets.xcassets */; };
 		A00B600925F651DF000C3804 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A00B600725F651DF000C3804 /* LaunchScreen.storyboard */; };
+		A077175525F7AFC000CDC465 /* AirPurifierDetectorV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A077175425F7AFBF00CDC465 /* AirPurifierDetectorV2.mlmodel */; };
+		A0E660C425F79CD500D20F3D /* AirPurifierDetectorV1.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = A0E660C325F79CD500D20F3D /* AirPurifierDetectorV1.mlmodel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A00B5FF925F651DE000C3804 /* ARRemoteController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARRemoteController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A00B5FFC25F651DE000C3804 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A00B5FFE25F651DE000C3804 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		A00B600025F651DE000C3804 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		A00B600025F651DE000C3804 /* ObjectDetectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectDetectionViewController.swift; sourceTree = "<group>"; };
 		A00B600325F651DE000C3804 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A00B600525F651DF000C3804 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A00B600825F651DF000C3804 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A00B600A25F651DF000C3804 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A077175425F7AFBF00CDC465 /* AirPurifierDetectorV2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = AirPurifierDetectorV2.mlmodel; path = ../AirPurifierDetectorV2.mlmodel; sourceTree = "<group>"; };
+		A0E660C325F79CD500D20F3D /* AirPurifierDetectorV1.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = AirPurifierDetectorV1.mlmodel; path = ../AirPurifierDetectorV1.mlmodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +44,8 @@
 		A00B5FF025F651DE000C3804 = {
 			isa = PBXGroup;
 			children = (
+				A0E660C325F79CD500D20F3D /* AirPurifierDetectorV1.mlmodel */,
+				A077175425F7AFBF00CDC465 /* AirPurifierDetectorV2.mlmodel */,
 				A00B5FFB25F651DE000C3804 /* ARRemoteController */,
 				A00B5FFA25F651DE000C3804 /* Products */,
 			);
@@ -58,7 +64,7 @@
 			children = (
 				A00B5FFC25F651DE000C3804 /* AppDelegate.swift */,
 				A00B5FFE25F651DE000C3804 /* SceneDelegate.swift */,
-				A00B600025F651DE000C3804 /* ViewController.swift */,
+				A00B600025F651DE000C3804 /* ObjectDetectionViewController.swift */,
 				A00B600225F651DE000C3804 /* Main.storyboard */,
 				A00B600525F651DF000C3804 /* Assets.xcassets */,
 				A00B600725F651DF000C3804 /* LaunchScreen.storyboard */,
@@ -137,9 +143,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A00B600125F651DE000C3804 /* ViewController.swift in Sources */,
+				A0E660C425F79CD500D20F3D /* AirPurifierDetectorV1.mlmodel in Sources */,
+				A00B600125F651DE000C3804 /* ObjectDetectionViewController.swift in Sources */,
 				A00B5FFD25F651DE000C3804 /* AppDelegate.swift in Sources */,
 				A00B5FFF25F651DE000C3804 /* SceneDelegate.swift in Sources */,
+				A077175525F7AFC000CDC465 /* AirPurifierDetectorV2.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
