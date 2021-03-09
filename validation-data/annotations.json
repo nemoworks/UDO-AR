@@ -1,0 +1,74 @@
+[
+    {
+        "imagefilename" : "1.jpg",
+        "annotations" : [
+            {
+                "label" : "air-purifier",
+                "coordinates" : {
+                    "y" : 266,
+                    "x" : 257,
+                    "width" : 256, 
+                    "height" : 410
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename" : "2.jpg",
+        "annotations" : [
+            {
+                "label" : "air-purifier",
+                "coordinates" : {
+                    "y" : 429,
+                    "x" : 625,
+                    "width" : 396, 
+                    "height" : 590
+                }
+            }
+        ]
+    },
+ 
+    {
+        "imagefilename" : "4.HEIC",
+        "annotations" : [
+            {
+                "label" : "air-purifier",
+                "coordinates" : {
+                    "y" : 644.5,
+                    "x" : 500,
+                    "width" : 506, 
+                    "height" : 765
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename" : "5.HEIC",
+        "annotations" : [
+            {
+                "label" : "air-purifier",
+                "coordinates" : {
+                    "y" : 695,
+                    "x" : 465,
+                    "width" : 640, 
+                    "height" : 996
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename" : "6.HEIC",
+        "annotations" : [
+            {
+                "label" : "air-purifier",
+                "coordinates" : {
+                    "y" : 671,
+                    "x" : 516,
+                    "width" : 694, 
+                    "height" : 1004
+                }
+            }
+        ]
+    },
+    
+]
