@@ -22,6 +22,7 @@ class ObjectDetectionViewController: UIViewController, ARSCNViewDelegate {
     var boundingBox = CAShapeLayer()
     var contentNodes = [SCNNode]()
     
+    var frameCount = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +66,7 @@ class ObjectDetectionViewController: UIViewController, ARSCNViewDelegate {
             let y = box.minY * self.sceneView.bounds.height
             let width = box.width * self.sceneView.bounds.width
             let height = box.height * self.sceneView.bounds.height
-            self.boundingBox.path = UIBezierPath(roundedRect: CGRect(x: x, y: y, width: width, height: height), cornerRadius: 10).cgPath
+            self.boundingBox.path = UIBezierPath(roundedRect: CGRect(x: x , y: y , width: width, height: height), cornerRadius: 4).cgPath
         }
     }
     
@@ -74,7 +75,7 @@ class ObjectDetectionViewController: UIViewController, ARSCNViewDelegate {
     
     lazy var objectDetectionRequest: VNCoreMLRequest = {
         do {
-            let model = try VNCoreMLModel(for: AirPurifierDetectorV1(configuration: MLModelConfiguration()).model)
+            let model = try VNCoreMLModel(for: AirPurifierDetectorV2(configuration: MLModelConfiguration()).model)
             let request = VNCoreMLRequest(model: model) {
                 [weak self] request, error in
                 self?.processDetections(for: request, error: error)
@@ -94,16 +95,18 @@ class ObjectDetectionViewController: UIViewController, ARSCNViewDelegate {
         
         guard let results = request.results else {return}
         
+        // print(results)
+        
         for observation in results where observation is VNRecognizedObjectObservation {
             guard let objectObservation = observation as? VNRecognizedObjectObservation else {continue}
             let topLabelObservation = objectObservation.labels.first!
     
-            if topLabelObservation.identifier == "air-purifier" && topLabelObservation.confidence > 0.8 {
-                print("Find a air purifier at \(objectObservation.boundingBox)")
+            if topLabelObservation.identifier == "air-purifier" {
+                // print("Find a air purifier at \(objectObservation.boundingBox)")
                 
-                guard let currentFrame = sceneView.session.currentFrame else {continue}
+                // guard let currentFrame = sceneView.session.currentFrame else {continue}
                 
-                
+            
                 self.dispalyBoundingBox(box: objectObservation.boundingBox)
             }
         }
@@ -114,6 +117,16 @@ class ObjectDetectionViewController: UIViewController, ARSCNViewDelegate {
     
     // Perform the request at every beginning of the render loop.
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        
+        if frameCount % 10 == 9 {
+            self.boundingBox.path = nil
+            return
+        }
+        
+        if frameCount % 10 != 0 {
+            return
+        }
+        
         guard let capturedImage = sceneView.session.currentFrame?.capturedImage else {return}
         
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: capturedImage, options: [:])
