@@ -362,5 +362,257 @@
                 }
             }
         ]
+    },
+    {
+        "imagefilename": "2-1.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "x": 365.0,
+                    "y": 750.0,
+                    "width": 174.0,
+                    "height": 326.0
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-2.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 731.0,
+                    "x": 410.5,
+                    "width": 181,
+                    "height": 356
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-3.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 717.0,
+                    "x": 427.0,
+                    "width": 192,
+                    "height": 354
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-4.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 700.0,
+                    "x": 508.5,
+                    "width": 213,
+                    "height": 362
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-5.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 758.0,
+                    "x": 422.5,
+                    "width": 251,
+                    "height": 450
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-6.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 953.0,
+                    "x": 358.0,
+                    "width": 266,
+                    "height": 446
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-7.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 1177.0,
+                    "x": 732.5,
+                    "width": 261,
+                    "height": 488
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-8.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 1095.5,
+                    "x": 735.5,
+                    "width": 251,
+                    "height": 485
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-9.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 1035.0,
+                    "x": 716.5,
+                    "width": 215,
+                    "height": 400
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-10.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 948.0,
+                    "x": 526.0,
+                    "width": 278,
+                    "height": 452
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-11.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 1109.0,
+                    "x": 417.5,
+                    "width": 401,
+                    "height": 452
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-12.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 1226.5,
+                    "x": 572.5,
+                    "width": 551,
+                    "height": 759
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-13.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 852.0,
+                    "x": 771.0,
+                    "width": 646,
+                    "height": 970
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-14.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 1083.5,
+                    "x": 486.0,
+                    "width": 404,
+                    "height": 539
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-15.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 953.0,
+                    "x": 563.5,
+                    "width": 391,
+                    "height": 516
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-16.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 885.5,
+                    "x": 560.0,
+                    "width": 484,
+                    "height": 743
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-17.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 1090.0,
+                    "x": 373.0,
+                    "width": 342,
+                    "height": 498
+                }
+            }
+        ]
+    },
+    {
+        "imagefilename": "2-18.png",
+        "annotations": [
+            {
+                "label": "air-purifier",
+                "coordinates": {
+                    "y": 1329.5,
+                    "x": 310.5,
+                    "width": 411,
+                    "height": 717
+                }
+            }
+        ]
     }
 ]
