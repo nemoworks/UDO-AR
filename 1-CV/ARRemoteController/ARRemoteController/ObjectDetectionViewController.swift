@@ -84,7 +84,7 @@ class ObjectDetectionViewController: UIViewController, ARSCNViewDelegate {
     
     lazy var objectDetectionRequest: VNCoreMLRequest = {
         do {
-            let model = try VNCoreMLModel(for: AirPurifierDetectorV2(configuration: MLModelConfiguration()).model)
+            let model = try VNCoreMLModel(for: AirPurifierDetectorV5(configuration: MLModelConfiguration()).model)
             let request = VNCoreMLRequest(model: model) {
                 [weak self] request, error in
                 self?.processDetections(for: request, error: error)
