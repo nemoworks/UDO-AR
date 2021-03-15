@@ -19,23 +19,46 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4sa-Of-hOY">
                                 <rect key="frame" x="0.0" y="0.0" width="1194" height="814"/>
                             </arscnView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3hS-qQ-W6Y">
+                                <rect key="frame" x="477" y="120" width="240" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="78H-NR-pjb"/>
+                                    <constraint firstAttribute="width" constant="240" id="rXh-FF-7QN"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBf-eA-rgO">
+                                <rect key="frame" x="487" y="120" width="220" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="XcO-Ub-i1o"/>
+                                    <constraint firstAttribute="width" constant="220" id="jDI-NP-mFf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="4sa-Of-hOY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="AXI-Pm-XgR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4sa-Of-hOY" secondAttribute="trailing" id="AZ9-qu-982"/>
+                            <constraint firstItem="3hS-qQ-W6Y" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="U59-SK-OOD"/>
                             <constraint firstItem="4sa-Of-hOY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ebY-sD-t6N"/>
+                            <constraint firstItem="EBf-eA-rgO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="120" id="ee7-nj-xv0"/>
+                            <constraint firstItem="3hS-qQ-W6Y" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="120" id="nqk-IQ-rCc"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="4sa-Of-hOY" secondAttribute="bottom" id="pLG-uA-Wbl"/>
+                            <constraint firstItem="EBf-eA-rgO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="wnV-wo-E7b"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="arSessionInfo" destination="EBf-eA-rgO" id="eJz-9w-l07"/>
+                        <outlet property="blurView" destination="3hS-qQ-W6Y" id="1nB-QU-edT"/>
                         <outlet property="sceneView" destination="4sa-Of-hOY" id="PFX-gO-nQR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3" y="57"/>
+            <point key="canvasLocation" x="-3.0150753768844223" y="56.834532374100725"/>
         </scene>
     </scenes>
     <resources>

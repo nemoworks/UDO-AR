@@ -13,6 +13,7 @@
 		A0DACD6D25FEFDCE00C7348C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0DACD6B25FEFDCE00C7348C /* Main.storyboard */; };
 		A0DACD6F25FEFDCF00C7348C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0DACD6E25FEFDCF00C7348C /* Assets.xcassets */; };
 		A0DACD7225FEFDCF00C7348C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0DACD7025FEFDCF00C7348C /* LaunchScreen.storyboard */; };
+		A0E9C9E925FF523800B465A0 /* ARCameraTrackingState.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E9C9E825FF523800B465A0 /* ARCameraTrackingState.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		A0DACD6E25FEFDCF00C7348C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0DACD7125FEFDCF00C7348C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0DACD7325FEFDCF00C7348C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A0E9C9E825FF523800B465A0 /* ARCameraTrackingState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCameraTrackingState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +42,7 @@
 		A0DACD5925FEFDCE00C7348C = {
 			isa = PBXGroup;
 			children = (
+				A0E9C9E725FF522600B465A0 /* Utils */,
 				A0DACD6425FEFDCE00C7348C /* UDO-AR */,
 				A0DACD6325FEFDCE00C7348C /* Products */,
 			);
@@ -65,6 +68,14 @@
 				A0DACD7325FEFDCF00C7348C /* Info.plist */,
 			);
 			path = "UDO-AR";
+			sourceTree = "<group>";
+		};
+		A0E9C9E725FF522600B465A0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				A0E9C9E825FF523800B465A0 /* ARCameraTrackingState.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,6 +150,7 @@
 			files = (
 				A0DACD6A25FEFDCE00C7348C /* ViewController.swift in Sources */,
 				A0DACD6625FEFDCE00C7348C /* AppDelegate.swift in Sources */,
+				A0E9C9E925FF523800B465A0 /* ARCameraTrackingState.swift in Sources */,
 				A0DACD6825FEFDCE00C7348C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

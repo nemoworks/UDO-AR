@@ -8,7 +8,7 @@
 import UIKit
 import ARKit
 
-class ViewController: UIViewController, ARSCNViewDelegate {
+class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
 
     @IBOutlet weak var sceneView: ARSCNView!
     
@@ -18,13 +18,31 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     var isOff = true
     
+    @IBOutlet weak var arSessionInfo: UILabel!
+    
+    @IBOutlet weak var blurView: UIView!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.sceneView.delegate = self
+        self.sceneView.session.delegate = self
         self.sceneView.autoenablesDefaultLighting = true
+        self.sceneView.showsStatistics = true
+        
+        arSessionInfo.text = "AR Session is initializing"
+        
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.layer.cornerRadius = 20
+        blurView.layer.cornerRadius = 20
+        blurEffectView.frame = self.blurView.bounds
+        blurView.addSubview(blurEffectView)
+        
     }
     
+    let dispatchQueueAR = DispatchQueue(label: "cn.nju.nemoworks")
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -37,36 +55,18 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     }
     
     
-    // MARK:- ARKit
+    // MARK:- ARSCNViewDelegate
     
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if let objectAnchor = anchor as? ARObjectAnchor {
             print(objectAnchor.referenceObject.name!)
-            let sphereNode = SCNNode(geometry: SCNSphere(radius: 0.005))
-            sphereNode.geometry?.firstMaterial?.diffuse.contents = UIColor.cyan
-            node.addChildNode(sphereNode)
+            let sphereNode = SCNNode(geometry: SCNSphere(radius: 0.05 / 2))
+            sphereNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+            let transform = anchor.transform
+            sphereNode.position = SCNVector3(transform.columns.3.x, transform.columns.3.y + 0.02, transform.columns.3.z)
+            self.sceneView.scene.rootNode.addChildNode(sphereNode)
+            self.bubbleNode = sphereNode
             
-            if objectAnchor.referenceObject.name! == "air-purifier" {
-                let billboardConstraint = SCNBillboardConstraint()
-                billboardConstraint.freeAxes = SCNBillboardAxis.Y
-                let bubble = SCNText(string: "Air Purifier: Off", extrusionDepth: 0.015)
-                let font = UIFont(name: "Futura", size: 0.1)
-                bubble.font = font
-                bubble.alignmentMode = CATextLayerAlignmentMode.center.rawValue
-                bubble.firstMaterial?.diffuse.contents = UIColor.red
-                bubble.firstMaterial?.specular.contents = UIColor.white
-                bubble.firstMaterial?.isDoubleSided = true
-                bubble.chamferRadius = CGFloat(0.002)
-                
-                let (minBound, maxBound) = bubble.boundingBox
-                let bubbleNode = SCNNode(geometry: bubble)
-                bubbleNode.pivot = SCNMatrix4MakeTranslation((maxBound.x - minBound.x)/2, minBound.y, 0.015 / 2)
-                bubbleNode.scale = SCNVector3(0.5, 0.5, 0.5)
-                bubbleNode.name = "text"
-                bubbleNode.constraints = [billboardConstraint]
-                node.addChildNode(bubbleNode)
-                self.bubbleNode = bubbleNode
-            }
         }
     }
     
@@ -75,13 +75,19 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         if touch.view == self.sceneView {
             let viewTouchLocation = touch.location(in: self.sceneView)
-            guard let result = sceneView.hitTest(viewTouchLocation, options: nil).first else {return}
+            let results = sceneView.hitTest(viewTouchLocation, options: nil)
+            print(results)
+            guard let result = results.first else {return}
             
             if let bubble = bubbleNode,  bubble == result.node {
                 if isOff {
-                    turnOnAirPurifier()
+                    dispatchQueueAR.async {
+                        self.turnOnAirPurifier()
+                    }
                 } else {
-                    turnOffAirPurifier()
+                    dispatchQueueAR.async {
+                        self.turnOffAirPurifier()
+                    }
                 }
             }
         }
@@ -89,9 +95,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func turnOnAirPurifier() {
         isOff = false
-        if let textGeometry = self.bubbleNode?.geometry as? SCNText {
-            textGeometry.string = "Air Purifier: On"
-            textGeometry.firstMaterial?.diffuse.contents = UIColor.green
+        if let sphere = self.bubbleNode?.geometry as? SCNSphere {
+            sphere.firstMaterial?.diffuse.contents = UIColor.green
         }
         
         // MARK: - TODO
@@ -99,12 +104,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     
     func turnOffAirPurifier() {
         isOff = true
-        if let textGeometry = self.bubbleNode?.geometry as? SCNText {
-            textGeometry.string = "Air Purifier: Off"
-            textGeometry.firstMaterial?.diffuse.contents = UIColor.red
+        if let sphere = self.bubbleNode?.geometry as? SCNSphere {
+            sphere.firstMaterial?.diffuse.contents = UIColor.red
         }
     }
     
+    
+    // MARK:- ARSessionDelegate
 
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+        self.arSessionInfo.text = camera.trackingState.presentationString
+    }
 }
 
