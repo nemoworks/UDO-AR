@@ -36,13 +36,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="cUN-eD-gKc">
+                                <rect key="frame" x="563" y="609" width="68" height="69"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="69" id="6TF-KE-2OZ"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="69" id="NeW-Lh-qSb"/>
+                                    <constraint firstAttribute="width" constant="68" id="OZ3-ze-uwF"/>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="68" id="dtN-9j-afs"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="4sa-Of-hOY" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="AXI-Pm-XgR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4sa-Of-hOY" secondAttribute="trailing" id="AZ9-qu-982"/>
+                            <constraint firstItem="cUN-eD-gKc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NSB-sA-byb"/>
                             <constraint firstItem="3hS-qQ-W6Y" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="U59-SK-OOD"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="cUN-eD-gKc" secondAttribute="bottom" constant="136" id="VaD-Bt-kVL"/>
                             <constraint firstItem="4sa-Of-hOY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ebY-sD-t6N"/>
                             <constraint firstItem="EBf-eA-rgO" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="120" id="ee7-nj-xv0"/>
                             <constraint firstItem="3hS-qQ-W6Y" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="120" id="nqk-IQ-rCc"/>
@@ -53,6 +64,7 @@
                     <connections>
                         <outlet property="arSessionInfo" destination="EBf-eA-rgO" id="eJz-9w-l07"/>
                         <outlet property="blurView" destination="3hS-qQ-W6Y" id="1nB-QU-edT"/>
+                        <outlet property="httpReqeustIndicator" destination="cUN-eD-gKc" id="93F-uo-ADu"/>
                         <outlet property="sceneView" destination="4sa-Of-hOY" id="PFX-gO-nQR"/>
                     </connections>
                 </viewController>
