@@ -18,11 +18,15 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     var isOff = true
     
+    var httpHandler = HttpHandler()
+    
     @IBOutlet weak var arSessionInfo: UILabel!
     
     @IBOutlet weak var blurView: UIView!
     
     @IBOutlet weak var httpReqeustIndicator: UIActivityIndicatorView!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +46,8 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         blurView.addSubview(blurEffectView)
         
         self.httpReqeustIndicator.isHidden = true
+        
+        self.httpHandler.delegate = self
         
     }
     
@@ -109,51 +115,31 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
     
     func handleGesture() {
-        self.httpReqeustIndicator.startAnimating()
+        DispatchQueue.main.async {
+            self.httpReqeustIndicator.startAnimating()
+        }
         let sphere = self.bubbleNode?.geometry as! SCNSphere
         if !isOff {
             sphere.firstMaterial?.diffuse.contents = UIColor.green
-            sendRequest(to: "http://192.168.124.4/api/v1/udo/turn-on", method: "GET")
+            let body = ["entity_id" : "fan.mypurifier2"]
+            let bodyData = try? JSONSerialization.data(
+                withJSONObject: body,
+                options: []
+            )
+            self.httpHandler.sendRequest(to: "http://192.168.124.4:8000/api/v1/udo/turn-on", method: "POST", bodyData: bodyData)
             
         } else {
             sphere.firstMaterial?.diffuse.contents = UIColor.red
-            sendRequest(to: "http://192.168.124.4/api/v1/udo/turn-off", method: "POST")
+            let body = ["entity_id" : "fan.mypurifier2"]
+            let bodyData = try? JSONSerialization.data(
+                withJSONObject: body,
+                options: []
+            )
+            self.httpHandler.sendRequest(to: "http://192.168.124.4:8000/api/v1/udo/turn-off", method: "POST", bodyData: bodyData)
         }
     }
     
-    func sendRequest(to url: String, method: String) {
-        let requestUrl = URL(string: url)!
-        var request = URLRequest(url: requestUrl)
-        request.setValue("test auth token", forHTTPHeaderField: "Authorization")
-        let body = ["entity_id" : "fan.mypurifier2"]
-        let bodyData = try? JSONSerialization.data(
-            withJSONObject: body,
-            options: []
-        )
-        
-        request.httpMethod = method
-        request.httpBody = bodyData
-        
-        
-        let session = URLSession.shared
-        let task = session.dataTask(with: request) {
-            (data, response, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-            
-            if let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode == 200 {
-                    // MARK:- TODO
-                } else {
-                    
-                }
-            }
-        }
-        
-        task.resume()
-        
-    }
+    
     
     
     // MARK:- ARSessionDelegate
@@ -163,3 +149,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     }
 }
 
+extension ViewController: HttpHandlerDelegate {
+    func handleResponseStatus(statusCode: Int) {
+        DispatchQueue.main.async {
+            self.httpReqeustIndicator.stopAnimating()
+        }
+        if statusCode == 200 {
+            // MARK:- TODO
+        } else {
+            
+        }
+    }
+    
+    
+}
