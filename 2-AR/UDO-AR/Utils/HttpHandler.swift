@@ -48,4 +48,16 @@ class HttpHandler: NSObject {
         task.resume()
         
     }
+    
+    func sendTurnOnRequest() {
+        
+    }
+    
+    func sendTurnOffRequest() {
+        
+    }
+    
+    func fetchState() {
+        
+    }
 }
