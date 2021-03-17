@@ -105,37 +105,33 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     // MARK:- Gesture handle
     
     func turnOnAirPurifier() {
-        isOff = false
-        self.handleGesture()
+        self.handleHttpRequest()
     }
     
     func turnOffAirPurifier() {
-        isOff = true
-        self.handleGesture()
+        self.handleHttpRequest()
     }
     
-    func handleGesture() {
+    func handleHttpRequest() {
         DispatchQueue.main.async {
             self.httpReqeustIndicator.startAnimating()
         }
-        let sphere = self.bubbleNode?.geometry as! SCNSphere
+        
         if !isOff {
-            sphere.firstMaterial?.diffuse.contents = UIColor.green
             let body = ["entity_id" : "fan.mypurifier2"]
             let bodyData = try? JSONSerialization.data(
                 withJSONObject: body,
                 options: []
             )
-            self.httpHandler.sendRequest(to: "http://192.168.124.4:8000/api/v1/udo/turn-on", method: "POST", bodyData: bodyData)
+            self.httpHandler.sendRequest(to: "http://192.168.1.111:8000/api/v1/udo/turn-on", method: "POST", bodyData: bodyData)
             
         } else {
-            sphere.firstMaterial?.diffuse.contents = UIColor.red
             let body = ["entity_id" : "fan.mypurifier2"]
             let bodyData = try? JSONSerialization.data(
                 withJSONObject: body,
                 options: []
             )
-            self.httpHandler.sendRequest(to: "http://192.168.124.4:8000/api/v1/udo/turn-off", method: "POST", bodyData: bodyData)
+            self.httpHandler.sendRequest(to: "http://192.168.1.111:8000/api/v1/udo/turn-off", method: "POST", bodyData: bodyData)
         }
     }
     
@@ -156,8 +152,29 @@ extension ViewController: HttpHandlerDelegate {
         }
         if statusCode == 200 {
             // MARK:- TODO
+            let sphere = self.bubbleNode?.geometry as! SCNSphere
+            isOff = !isOff
+            if !isOff {
+                DispatchQueue.main.async {
+                    sphere.firstMaterial?.diffuse.contents = UIColor.green
+                }
+            } else {
+                DispatchQueue.main.async {
+                    sphere.firstMaterial?.diffuse.contents = UIColor.red
+                }
+            }
         } else {
+            let refreshAlert = UIAlertController(title: "Something wrong", message: "发送http请求失败" , preferredStyle: .alert)
+            refreshAlert.addAction(UIAlertAction(title: "重试", style: .default){
+                _ in
+                self.handleHttpRequest()
+            })
             
+            refreshAlert.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+            
+            DispatchQueue.main.async {
+                self.present(refreshAlert, animated: true, completion: nil)
+            }
         }
     }
     
