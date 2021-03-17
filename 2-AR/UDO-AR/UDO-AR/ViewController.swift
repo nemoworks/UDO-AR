@@ -69,12 +69,33 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if let objectAnchor = anchor as? ARObjectAnchor {
             print(objectAnchor.referenceObject.name!)
-            let sphereNode = SCNNode(geometry: SCNSphere(radius: 0.05 / 2))
-            sphereNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+//            let sphereNode = SCNNode(geometry: SCNSphere(radius: 0.05 / 2))
+//            sphereNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
+//            let transform = anchor.transform
+//            sphereNode.position = SCNVector3(transform.columns.3.x, transform.columns.3.y + 0.02, transform.columns.3.z)
+//            self.sceneView.scene.rootNode.addChildNode(sphereNode)
+//            self.bubbleNode = sphereNode
+            
+            let billboardConstraint = SCNBillboardConstraint()
+            billboardConstraint.freeAxes = SCNBillboardAxis.Y
+            let arText = SCNText(string: "On", extrusionDepth: 0.5)
+            let font = UIFont(name: "System", size: 0.2)
+            arText.font = font
+            arText.firstMaterial?.diffuse.contents = UIColor.green
+            arText.firstMaterial?.specular.contents = UIColor.white
+            arText.firstMaterial?.isDoubleSided = true
+            arText.chamferRadius = 0.2
+            
+            let (minBound, maxBound) = arText.boundingBox
+            let textNode = SCNNode(geometry: arText)
+            textNode.pivot = SCNMatrix4MakeTranslation((maxBound.x - minBound.x) / 2, minBound.y, 0.1)
+            textNode.scale = SCNVector3(0.02, 0.02, 0.02)
+            
             let transform = anchor.transform
-            sphereNode.position = SCNVector3(transform.columns.3.x, transform.columns.3.y + 0.02, transform.columns.3.z)
-            self.sceneView.scene.rootNode.addChildNode(sphereNode)
-            self.bubbleNode = sphereNode
+            textNode.position = SCNVector3(transform.columns.3.x, transform.columns.3.y + 0.02, transform.columns.3.z)
+            self.sceneView.scene.rootNode.addChildNode(textNode)
+            
+            self.bubbleNode = textNode
             
         }
     }
@@ -152,15 +173,17 @@ extension ViewController: HttpHandlerDelegate {
         }
         if statusCode == 200 {
             // MARK:- TODO
-            let sphere = self.bubbleNode?.geometry as! SCNSphere
+            let text = self.bubbleNode?.geometry as! SCNText
             isOff = !isOff
             if !isOff {
                 DispatchQueue.main.async {
-                    sphere.firstMaterial?.diffuse.contents = UIColor.green
+                    text.string = "Off"
+                    text.firstMaterial?.diffuse.contents = UIColor.red
                 }
             } else {
                 DispatchQueue.main.async {
-                    sphere.firstMaterial?.diffuse.contents = UIColor.red
+                    text.string = "On"
+                    text.firstMaterial?.diffuse.contents = UIColor.green
                 }
             }
         } else {

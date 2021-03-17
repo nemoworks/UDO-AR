@@ -25,7 +25,11 @@ class HttpHandler: NSObject {
         request.httpBody = bodyData
         
         
-        let session = URLSession.shared
+        
+        let sessionConfig = URLSessionConfiguration.default
+        sessionConfig.timeoutIntervalForRequest = 3.0
+        sessionConfig.timeoutIntervalForResource = 3.0
+        let session = URLSession(configuration: sessionConfig)
         let task = session.dataTask(with: request) {
             (data, response, error) in
             if let error = error {
