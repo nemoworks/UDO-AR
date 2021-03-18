@@ -15,10 +15,16 @@ class HttpHandler: NSObject {
     
     weak var delegate: HttpHandlerDelegate?
     
+
+    // let api = "192.168.1.112:8123"
+    let token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI3ZmJlZjYxMGQ3ZmY0YWE5ODAxZTMxZWQ4OGUwYzI1MyIsImhdCI6MTYxNTcwMDgyMSwiZXhwIjoxOTMxMDYwODIxfQ.ULDq6jx5XFxYeDOG2qTd-CiISry3lh_HVPvc5Y0Elxo"
+    // for mock
+    let api = "192.168.1.111:8000"
+    
     func sendRequest(to url: String, method: String, bodyData: Data?) {
         let requestUrl = URL(string: url)!
         var request = URLRequest(url: requestUrl)
-        request.setValue("test auth token", forHTTPHeaderField: "Authorization")
+        request.setValue(self.token, forHTTPHeaderField: "Authorization")
         
         
         request.httpMethod = method
@@ -56,7 +62,7 @@ class HttpHandler: NSObject {
             options: []
         )
         
-        self.sendRequest(to: "http://192.168.1.111:8000/api/v1/udo/turn-on", method: "POST", bodyData: bodyData)
+        self.sendRequest(to: "http://\(self.api)/api/services/fan/turn_on", method: "POST", bodyData: bodyData)
     }
     
     func sendTurnOffRequest() {
@@ -66,7 +72,7 @@ class HttpHandler: NSObject {
             options: []
         )
         
-        self.sendRequest(to: "http://192.168.1.111:8000/api/v1/udo/turn-off", method: "POST", bodyData: bodyData)
+        self.sendRequest(to: "http://\(self.api)/api/services/fan/turn_off", method: "POST", bodyData: bodyData)
     }
     
     func fetchState() {

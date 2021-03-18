@@ -14,7 +14,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     var referenceObject: ARReferenceObject?
     
-    var bubbleNode: SCNNode? = nil
+    var textNode: SCNNode? = nil
+    var sphereNode: SCNNode? = nil
+    let airParticleSystem = SCNParticleSystem(named: "air-particle.scnp", inDirectory: nil)
     
     var isRunning = false
     
@@ -46,8 +48,9 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         blurView.addSubview(blurEffectView)
         
         self.httpReqeustIndicator.isHidden = true
-        
         self.httpHandler.delegate = self
+        
+        self.airParticleSystem?.particleColor = .cyan
         
     }
     
@@ -70,27 +73,37 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         if let objectAnchor = anchor as? ARObjectAnchor {
             print(objectAnchor.referenceObject.name!)
 
-            
+            // 1. Add Text Node
             let billboardConstraint = SCNBillboardConstraint()
             billboardConstraint.freeAxes = SCNBillboardAxis.Y
-            let arText = SCNText(string: "On", extrusionDepth: 0.5)
+            let arText = SCNText(string: "Xiaomi AirPurifier", extrusionDepth: 0.5)
             let font = UIFont(name: "System", size: 0.2)
             arText.font = font
-            arText.firstMaterial?.diffuse.contents = UIColor.green
+            arText.firstMaterial?.diffuse.contents = UIColor.red
             arText.firstMaterial?.specular.contents = UIColor.white
             arText.firstMaterial?.isDoubleSided = true
             arText.chamferRadius = 0.2
+            
             
             let (minBound, maxBound) = arText.boundingBox
             let textNode = SCNNode(geometry: arText)
             textNode.pivot = SCNMatrix4MakeTranslation((maxBound.x - minBound.x) / 2, minBound.y, 0.1)
             textNode.scale = SCNVector3(0.02, 0.02, 0.02)
+            textNode.constraints = [billboardConstraint]
             
             let transform = anchor.transform
-            textNode.position = SCNVector3(transform.columns.3.x, transform.columns.3.y + 0.02, transform.columns.3.z)
+            textNode.position = SCNVector3(transform.columns.3.x, transform.columns.3.y + 0.15, transform.columns.3.z - 0.15)
             self.sceneView.scene.rootNode.addChildNode(textNode)
+            self.textNode = textNode
             
-            self.bubbleNode = textNode
+            // 2. Add Sphere Node
+            let sphere = SCNSphere(radius: 0.05)
+            let sphereNode = SCNNode(geometry: sphere)
+            sphereNode.geometry?.firstMaterial?.diffuse.contents = UIColor.blue
+            sphereNode.geometry?.firstMaterial?.specular.contents = UIColor.white
+            sphereNode.position = SCNVector3(transform.columns.3.x, transform.columns.3.y, transform.columns.3.z)
+            self.sceneView.scene.rootNode.addChildNode(sphereNode)
+            self.sphereNode = sphereNode
             
         }
     }
@@ -104,7 +117,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             print(results)
             guard let result = results.first else {return}
             
-            if let bubble = bubbleNode,  bubble == result.node {
+            if let sphereNode = self.sphereNode,  sphereNode == result.node {
                 if !isRunning {
                     dispatchQueueAR.async {
                         self.turnOnAirPurifier()
@@ -157,17 +170,17 @@ extension ViewController: HttpHandlerDelegate {
         }
         if statusCode == 200 {
             // MARK:- TODO
-            let text = self.bubbleNode?.geometry as! SCNText
+            let text = self.textNode?.geometry as! SCNText
             isRunning = !isRunning
-            if !isRunning {
+            if isRunning {
                 DispatchQueue.main.async {
-                    text.string = "Off"
-                    text.firstMaterial?.diffuse.contents = UIColor.red
+                    text.firstMaterial?.diffuse.contents = UIColor.green
+                    self.sphereNode?.addParticleSystem(self.airParticleSystem!)
                 }
             } else {
                 DispatchQueue.main.async {
-                    text.string = "On"
-                    text.firstMaterial?.diffuse.contents = UIColor.green
+                    text.firstMaterial?.diffuse.contents = UIColor.red
+                    self.sphereNode?.removeParticleSystem(self.airParticleSystem!)
                 }
             }
         } else {

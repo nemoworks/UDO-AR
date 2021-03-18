@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A0021CA826034DDC0053BED8 /* air-particle.scnp in Resources */ = {isa = PBXBuildFile; fileRef = A0021CA726034DDC0053BED8 /* air-particle.scnp */; };
+		A0021CB1260350920053BED8 /* SCNResource.scnassets in Resources */ = {isa = PBXBuildFile; fileRef = A0021CB0260350920053BED8 /* SCNResource.scnassets */; };
 		A0166FB026010A2200AFFEF4 /* HttpHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0166FAF26010A2200AFFEF4 /* HttpHandler.swift */; };
 		A0C10BDA26032361007DFE4B /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C10BD926032361007DFE4B /* BoundingBox.swift */; };
 		A0DACD6625FEFDCE00C7348C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DACD6525FEFDCE00C7348C /* AppDelegate.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A0021CA726034DDC0053BED8 /* air-particle.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = "air-particle.scnp"; sourceTree = "<group>"; };
+		A0021CB0260350920053BED8 /* SCNResource.scnassets */ = {isa = PBXFileReference; lastKnownFileType = wrapper.scnassets; path = SCNResource.scnassets; sourceTree = "<group>"; };
 		A0166FAF26010A2200AFFEF4 /* HttpHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHandler.swift; sourceTree = "<group>"; };
 		A0C10BD926032361007DFE4B /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		A0DACD6225FEFDCE00C7348C /* UDO-AR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UDO-AR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,6 +47,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A0021CA626034DBB0053BED8 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				A0DACD6B25FEFDCE00C7348C /* Main.storyboard */,
+				A0DACD7025FEFDCF00C7348C /* LaunchScreen.storyboard */,
+				A0021CA726034DDC0053BED8 /* air-particle.scnp */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		A0C10BD726032321007DFE4B /* Http */ = {
 			isa = PBXGroup;
 			children = (
@@ -62,6 +76,9 @@
 		A0DACD5925FEFDCE00C7348C = {
 			isa = PBXGroup;
 			children = (
+				A0021CB0260350920053BED8 /* SCNResource.scnassets */,
+				A0DACD6E25FEFDCF00C7348C /* Assets.xcassets */,
+				A0021CA626034DBB0053BED8 /* Resource */,
 				A0C10BD826032334007DFE4B /* Visualization */,
 				A0C10BD726032321007DFE4B /* Http */,
 				A0E9C9E725FF522600B465A0 /* Utils */,
@@ -81,13 +98,10 @@
 		A0DACD6425FEFDCE00C7348C /* UDO-AR */ = {
 			isa = PBXGroup;
 			children = (
+				A0DACD7325FEFDCF00C7348C /* Info.plist */,
 				A0DACD6525FEFDCE00C7348C /* AppDelegate.swift */,
 				A0DACD6725FEFDCE00C7348C /* SceneDelegate.swift */,
 				A0DACD6925FEFDCE00C7348C /* ViewController.swift */,
-				A0DACD6B25FEFDCE00C7348C /* Main.storyboard */,
-				A0DACD6E25FEFDCF00C7348C /* Assets.xcassets */,
-				A0DACD7025FEFDCF00C7348C /* LaunchScreen.storyboard */,
-				A0DACD7325FEFDCF00C7348C /* Info.plist */,
 			);
 			path = "UDO-AR";
 			sourceTree = "<group>";
@@ -157,8 +171,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0021CA826034DDC0053BED8 /* air-particle.scnp in Resources */,
 				A0DACD7225FEFDCF00C7348C /* LaunchScreen.storyboard in Resources */,
 				A0DACD6F25FEFDCF00C7348C /* Assets.xcassets in Resources */,
+				A0021CB1260350920053BED8 /* SCNResource.scnassets in Resources */,
 				A0DACD6D25FEFDCE00C7348C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
