@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		A0166FB026010A2200AFFEF4 /* HttpHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0166FAF26010A2200AFFEF4 /* HttpHandler.swift */; };
+		A0C10BDA26032361007DFE4B /* BoundingBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0C10BD926032361007DFE4B /* BoundingBox.swift */; };
 		A0DACD6625FEFDCE00C7348C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DACD6525FEFDCE00C7348C /* AppDelegate.swift */; };
 		A0DACD6825FEFDCE00C7348C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DACD6725FEFDCE00C7348C /* SceneDelegate.swift */; };
 		A0DACD6A25FEFDCE00C7348C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DACD6925FEFDCE00C7348C /* ViewController.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		A0166FAF26010A2200AFFEF4 /* HttpHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpHandler.swift; sourceTree = "<group>"; };
+		A0C10BD926032361007DFE4B /* BoundingBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoundingBox.swift; sourceTree = "<group>"; };
 		A0DACD6225FEFDCE00C7348C /* UDO-AR.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UDO-AR.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0DACD6525FEFDCE00C7348C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A0DACD6725FEFDCE00C7348C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,9 +43,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A0C10BD726032321007DFE4B /* Http */ = {
+			isa = PBXGroup;
+			children = (
+				A0166FAF26010A2200AFFEF4 /* HttpHandler.swift */,
+			);
+			path = Http;
+			sourceTree = "<group>";
+		};
+		A0C10BD826032334007DFE4B /* Visualization */ = {
+			isa = PBXGroup;
+			children = (
+				A0C10BD926032361007DFE4B /* BoundingBox.swift */,
+			);
+			path = Visualization;
+			sourceTree = "<group>";
+		};
 		A0DACD5925FEFDCE00C7348C = {
 			isa = PBXGroup;
 			children = (
+				A0C10BD826032334007DFE4B /* Visualization */,
+				A0C10BD726032321007DFE4B /* Http */,
 				A0E9C9E725FF522600B465A0 /* Utils */,
 				A0DACD6425FEFDCE00C7348C /* UDO-AR */,
 				A0DACD6325FEFDCE00C7348C /* Products */,
@@ -76,7 +96,6 @@
 			isa = PBXGroup;
 			children = (
 				A0E9C9E825FF523800B465A0 /* ARCameraTrackingState.swift */,
-				A0166FAF26010A2200AFFEF4 /* HttpHandler.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -154,6 +173,7 @@
 				A0166FB026010A2200AFFEF4 /* HttpHandler.swift in Sources */,
 				A0DACD6A25FEFDCE00C7348C /* ViewController.swift in Sources */,
 				A0DACD6625FEFDCE00C7348C /* AppDelegate.swift in Sources */,
+				A0C10BDA26032361007DFE4B /* BoundingBox.swift in Sources */,
 				A0E9C9E925FF523800B465A0 /* ARCameraTrackingState.swift in Sources */,
 				A0DACD6825FEFDCE00C7348C /* SceneDelegate.swift in Sources */,
 			);

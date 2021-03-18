@@ -50,14 +50,27 @@ class HttpHandler: NSObject {
     }
     
     func sendTurnOnRequest() {
+        let body = ["entity_id" : "fan.mypurifier2"]
+        let bodyData = try? JSONSerialization.data(
+            withJSONObject: body,
+            options: []
+        )
         
+        self.sendRequest(to: "http://192.168.1.111:8000/api/v1/udo/turn-on", method: "POST", bodyData: bodyData)
     }
     
     func sendTurnOffRequest() {
+        let body = ["entity_id" : "fan.mypurifier2"]
+        let bodyData = try? JSONSerialization.data(
+            withJSONObject: body,
+            options: []
+        )
         
+        self.sendRequest(to: "http://192.168.1.111:8000/api/v1/udo/turn-off", method: "POST", bodyData: bodyData)
     }
     
     func fetchState() {
-        
+        // 需要发送带有JSON Body的GET请求，但是Swift的URLSession不支持发送带Body的GET
+        // 需要修改后端的方法
     }
 }

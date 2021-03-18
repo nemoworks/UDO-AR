@@ -16,7 +16,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     var bubbleNode: SCNNode? = nil
     
-    var isOff = true
+    var isRunning = false
     
     var httpHandler = HttpHandler()
     
@@ -69,12 +69,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     func renderer(_ renderer: SCNSceneRenderer, didAdd node: SCNNode, for anchor: ARAnchor) {
         if let objectAnchor = anchor as? ARObjectAnchor {
             print(objectAnchor.referenceObject.name!)
-//            let sphereNode = SCNNode(geometry: SCNSphere(radius: 0.05 / 2))
-//            sphereNode.geometry?.firstMaterial?.diffuse.contents = UIColor.red
-//            let transform = anchor.transform
-//            sphereNode.position = SCNVector3(transform.columns.3.x, transform.columns.3.y + 0.02, transform.columns.3.z)
-//            self.sceneView.scene.rootNode.addChildNode(sphereNode)
-//            self.bubbleNode = sphereNode
+
             
             let billboardConstraint = SCNBillboardConstraint()
             billboardConstraint.freeAxes = SCNBillboardAxis.Y
@@ -110,7 +105,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             guard let result = results.first else {return}
             
             if let bubble = bubbleNode,  bubble == result.node {
-                if isOff {
+                if !isRunning {
                     dispatchQueueAR.async {
                         self.turnOnAirPurifier()
                     }
@@ -138,21 +133,10 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             self.httpReqeustIndicator.startAnimating()
         }
         
-        if !isOff {
-            let body = ["entity_id" : "fan.mypurifier2"]
-            let bodyData = try? JSONSerialization.data(
-                withJSONObject: body,
-                options: []
-            )
-            self.httpHandler.sendRequest(to: "http://192.168.1.111:8000/api/v1/udo/turn-on", method: "POST", bodyData: bodyData)
-            
+        if !isRunning {
+            self.httpHandler.sendTurnOnRequest()
         } else {
-            let body = ["entity_id" : "fan.mypurifier2"]
-            let bodyData = try? JSONSerialization.data(
-                withJSONObject: body,
-                options: []
-            )
-            self.httpHandler.sendRequest(to: "http://192.168.1.111:8000/api/v1/udo/turn-off", method: "POST", bodyData: bodyData)
+            self.httpHandler.sendTurnOffRequest()
         }
     }
     
@@ -174,8 +158,8 @@ extension ViewController: HttpHandlerDelegate {
         if statusCode == 200 {
             // MARK:- TODO
             let text = self.bubbleNode?.geometry as! SCNText
-            isOff = !isOff
-            if !isOff {
+            isRunning = !isRunning
+            if !isRunning {
                 DispatchQueue.main.async {
                     text.string = "Off"
                     text.firstMaterial?.diffuse.contents = UIColor.red
