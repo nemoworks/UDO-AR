@@ -20,7 +20,11 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
     
     var isRunning = false
     
+    var browserOn = false
+    
     var httpHandler = HttpHandler()
+    
+    var arBrowser: ARBrowser?
     
     @IBOutlet weak var arSessionInfo: UILabel!
     
@@ -52,6 +56,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
         
         self.airParticleSystem?.particleColor = .cyan
         
+        self.arBrowser = ARBrowser(delegate: self)
     }
     
     let dispatchQueueAR = DispatchQueue(label: "cn.nju.nemoworks")
@@ -76,7 +81,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             // 1. Add Text Node
             let billboardConstraint = SCNBillboardConstraint()
             billboardConstraint.freeAxes = SCNBillboardAxis.Y
-            let arText = SCNText(string: "Xiaomi AirPurifier", extrusionDepth: 0.5)
+            let arText = SCNText(string: NSAttributedString(string: "XiaoMi\nAirPurifier"), extrusionDepth: 0.5)
             let font = UIFont(name: "System", size: 0.2)
             arText.font = font
             arText.firstMaterial?.diffuse.contents = UIColor.red
@@ -92,7 +97,7 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
             textNode.constraints = [billboardConstraint]
             
             let transform = anchor.transform
-            textNode.position = SCNVector3(transform.columns.3.x, transform.columns.3.y + 0.15, transform.columns.3.z - 0.15)
+            textNode.position = SCNVector3(transform.columns.3.x - 0.5, transform.columns.3.y + 0.15, transform.columns.3.z - 0.15)
             self.sceneView.scene.rootNode.addChildNode(textNode)
             self.textNode = textNode
             
@@ -127,7 +132,17 @@ class ViewController: UIViewController, ARSCNViewDelegate, ARSessionDelegate {
                         self.turnOffAirPurifier()
                     }
                 }
+            } else if let textNode = self.textNode, textNode == result.node {
+                if !browserOn {
+                    browserOn = true
+                    self.arBrowser?.placeARWebView(in: textNode.position)
+                } else {
+                    browserOn = false
+                    self.arBrowser?.removeARWebView()
+                }
+                
             }
+            
         }
     }
     
@@ -199,4 +214,16 @@ extension ViewController: HttpHandlerDelegate {
     }
     
     
+}
+
+
+extension ViewController: ARBrowserDelegate {
+    func addBrowserNode(node: SCNNode) {
+        self.sceneView.scene.rootNode.addChildNode(node)
+    }
+    
+    func removeBrowserNode(node: SCNNode) {
+        node.removeFromParentNode()
+    }
+
 }

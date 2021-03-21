@@ -19,7 +19,7 @@ class HttpHandler: NSObject {
     // let api = "192.168.1.112:8123"
     let token = "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI3ZmJlZjYxMGQ3ZmY0YWE5ODAxZTMxZWQ4OGUwYzI1MyIsImhdCI6MTYxNTcwMDgyMSwiZXhwIjoxOTMxMDYwODIxfQ.ULDq6jx5XFxYeDOG2qTd-CiISry3lh_HVPvc5Y0Elxo"
     // for mock
-    let api = "192.168.1.111:8000"
+    let api = "192.168.1.120:8000"
     
     func sendRequest(to url: String, method: String, bodyData: Data?) {
         let requestUrl = URL(string: url)!
