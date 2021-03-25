@@ -1,0 +1,17 @@
+{
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  },
+  "resources" : [
+    {
+      "filename" : "air-purifier-new.arobject"
+    },
+    {
+      "filename" : "mug2.arobject"
+    },
+    {
+      "filename" : "mug3.arobject"
+    }
+  ]
+}

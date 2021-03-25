@@ -1,6 +1,8 @@
 .DS_Store
 *.mlproj
 *.xcuserstate
+.idea
+node_modules
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

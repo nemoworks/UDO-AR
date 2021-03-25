@@ -1,0 +1,46 @@
+{
+  "entity_id": "fan.mypurifier2",
+  "state": "off",
+  "attributes": {
+    "speed_list": [
+      "Auto",
+      "Silent",
+      "Favorite",
+      "Idle"
+    ],
+    "speed": null,
+    "model": "zhimi.airpurifier.m1",
+    "temperature": 22.7,
+    "humidity": 38,
+    "aqi": 52,
+    "mode": "idle",
+    "filter_hours_used": 1630,
+    "filter_life_remaining": 53,
+    "favorite_level": 10,
+    "child_lock": false,
+    "led": false,
+    "motor_speed": 0,
+    "average_aqi": 8,
+    "learn_mode": false,
+    "extra_features": 0,
+    "turbo_mode_supported": false,
+    "button_pressed": "power",
+    "purify_volume": 73296,
+    "sleep_time": 72236,
+    "sleep_mode_learn_count": null,
+    "auto_detect": null,
+    "use_time": 5783980,
+    "buzzer": true,
+    "led_brightness": 2,
+    "sleep_mode": null,
+    "friendly_name": "mypurifier2",
+    "supported_features": 1
+  },
+  "last_changed": "2021-03-25T12:20:30.310893+00:00",
+  "last_updated": "2021-03-25T12:20:30.310893+00:00",
+  "context": {
+    "id": "67a59947e4d4391a8c636fe5e18fd73e",
+    "parent_id": null,
+    "user_id": "66acb24933a24ff79037646ddf30302a"
+  }
+}
