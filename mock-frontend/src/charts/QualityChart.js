@@ -2,9 +2,7 @@
 import React, {Component } from 'react';
 import { Gauge } from '@ant-design/charts';
 
-class QualityChart extends Component {
-
-  render() {
+function QualityChart(props) {
     var ticks = [0, 1 / 3, 2 / 3, 1];
     var color = ['#30BF78', '#FAAD14', '#F4664A'];
     var config = {
@@ -53,12 +51,10 @@ class QualityChart extends Component {
       },
     };
 
-
-
     return <div>
       <Gauge {...config}/>
     </div>
-  }
 }
+
 
   export default QualityChart

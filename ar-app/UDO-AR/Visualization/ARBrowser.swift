@@ -15,7 +15,7 @@ protocol ARBrowserDelegate: class {
 }
 
 class ARBrowser : NSObject {
-    var webView : UIWebView = UIWebView(frame: CGRect(x: 0, y: 0, width: 720, height: 540))
+    var webView : UIWebView = UIWebView(frame: CGRect(x: 0, y: 0, width: 1080, height: 1920))
     
     var webViewARNode: SCNNode?
     
@@ -26,9 +26,9 @@ class ARBrowser : NSObject {
     }
     
     func placeARWebView(in position: SCNVector3) {
-        let browserPlane = SCNPlane(width: 1.6, height: 1.2)
+        let browserPlane = SCNPlane(width: 1.2, height: 1.6)
         DispatchQueue.main.async {
-            let url = Bundle.main.url(forResource: "test", withExtension: "html")
+            let url = URL(string: "http://192.168.1.108:3000")
             self.webView.loadRequest(URLRequest(url: url!))
         }
         
