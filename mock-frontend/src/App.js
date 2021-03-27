@@ -6,64 +6,38 @@ import { useEffect, useState } from 'react';
 const axios = require('axios').default;
 
 
-var data1 = [
-  {
-    "Date": "2010-01",
-    "scales": 1998
-  },
-  {
-    "Date": "2010-02",
-    "scales": 1850
-  },
-  {
-    "Date": "2010-03",
-    "scales": 1720
-  },
-  {
-    "Date": "2010-04",
-    "scales": 1818
-  },
-  {
-    "Date": "2010-05",
-    "scales": 1920
-  },
-  {
-    "Date": "2010-06",
-    "scales": 1802
-  },
-  {
-    "Date": "2010-07",
-    "scales": 1945
-  },
-  {
-    "Date": "2010-08",
-    "scales": 1856
-  },
-  {
-    "Date": "2010-09",
-    "scales": 2107
-  },
-]
+
+
 
 function App() {
-  axios.get(
-    'http://localhost:8000/api/services/fan/states',
-    {
-      headers : {
-        Authorization : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI3ZmJlZjYxMGQ3ZmY0YWE5ODAxZTMxZWQ4OGUwYzI1MyIsImhdCI6MTYxNTcwMDgyMSwiZXhwIjoxOTMxMDYwODIxfQ.ULDq6jx5XFxYeDOG2qTd-CiISry3lh_HVPvc5Y0Elxo',
-        'Content-Type' : 'application/json;charset=utf-8'
-      }
-    }
-  ).then(({data})=>{
-    console.log(data)
+  const [data, setData] = useState({
+    aqi: 0.5,
+    speed: [{'index': 1, 'speed': 0}],
+    temp: [{'index': 1, 'temp': 0}],
+    humidity: [{'index': 1, 'humidity': 0}]
   })
 
-  const [data, setData] = useState(data1)
+  console.log(data);
 
   useEffect(()=>{
     const intervalId =setInterval(()=> {
-      data1[0].scales = data1[0].scales + 1
-      setData(data1)
+      axios.get(
+        'http://localhost:8000/api/services/fan/states',
+        {
+          headers : {
+            Authorization : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiI3ZmJlZjYxMGQ3ZmY0YWE5ODAxZTMxZWQ4OGUwYzI1MyIsImhdCI6MTYxNTcwMDgyMSwiZXhwIjoxOTMxMDYwODIxfQ.ULDq6jx5XFxYeDOG2qTd-CiISry3lh_HVPvc5Y0Elxo',
+            'Content-Type' : 'application/json;charset=utf-8'
+          }
+        }
+      ).then(({data:{attributes:{aqi, speed, temperature, humidity}}})=>{
+        return {
+          aqi: aqi[0] / 300,
+          speed: speed.map((v, i)=> ({'index':i + 1, 'speed':v})),
+          temp: temperature.map((v, i)=> ({'index':i + 1, 'temp':v})),
+          humidity: humidity.map((v, i)=> ({'index':i + 1, 'humidity':v}))
+        }
+      }).then(setData)
+      
     }, 1000);
 
     return ()=>{
@@ -77,28 +51,28 @@ function App() {
       <Row gutter={8}>
         <h1>空气质量(AQI)</h1>
         <Col span={8}>
-          <QualityChart />
+          <QualityChart aqi={data.aqi}/>
         </Col>
       </Row>
 
       <Row gutter={8}>
         <h1>风扇转速(Fan Speed)</h1>
         <Col span={8}>
-          <PerformanceChart fill={'l(270) 0:#ffffff 0.5:#7ec2f3 1:#1890ff'} data={data}/>
+          <PerformanceChart fill={'l(270) 0:#ffffff 0.5:#7ec2f3 1:#1890ff'} data={data.speed} xlabel={'index'} ylabel={'speed'}/>
         </Col>
       </Row>
 
       <Row gutter={8}>
         <h1>温度(Temprature)</h1>
         <Col span={8}>
-          <PerformanceChart fill={'l(270) 0:#ffffff 1:#01ee01'} data={data}/>
+          <PerformanceChart fill={'l(270) 0:#ffffff 1:#01ee01'} data={data.temp} xlabel={'index'} ylabel={'temp'}/>
         </Col>
       </Row>
 
       <Row gutter={8}>
         <h1>湿度(Humidity)</h1>
         <Col span={8}>
-          <PerformanceChart fill={'l(270) 0:#ffffff 1:#fe0000'} data={data}/>
+          <PerformanceChart fill={'l(270) 0:#ffffff 1:#fe0000'} data={data.humidity} xlabel={'index'} ylabel={'humidity'}/>
         </Col>
       </Row>
     </div>

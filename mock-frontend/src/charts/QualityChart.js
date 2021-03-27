@@ -6,7 +6,7 @@ function QualityChart(props) {
     var ticks = [0, 1 / 3, 2 / 3, 1];
     var color = ['#30BF78', '#FAAD14', '#F4664A'];
     var config = {
-      percent: 0.5,
+      percent: props.aqi,
       range: {
         ticks: [0, 1],
         color: ['l(0) 0:#30BF78 0.5:#FAAD14 1:#F4664A'],

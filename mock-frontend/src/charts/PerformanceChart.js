@@ -4,11 +4,11 @@ import { Area } from '@ant-design/charts';
 
 
 
-function PerformanceChart({fill, data}) {
+function PerformanceChart({fill, data, xlabel, ylabel}) {
     var config = {
       data,
-      xField: 'Date',
-      yField: 'scales',
+      xField: xlabel,
+      yField: ylabel,
       xAxis: { tickCount: 5 },
       areaStyle: () => ({fill}),
     };
